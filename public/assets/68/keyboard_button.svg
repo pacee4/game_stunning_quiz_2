@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="34"
+   height="34"
+   viewBox="0 0 34 34"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+     id="defs1" /><g
+     id="g1"
+     style="display:inline"
+     transform="translate(-89,-94.25)"><g
+       id="rect1"
+       style="display:inline;opacity:1"><g
+         id="g6"><path
+           style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;fill:#4c4c4c;fill-opacity:1;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+           d="m 96,95.25 h 20 c 3.324,0 6,2.676 6,6 v 20 c 0,3.324 -2.676,6 -6,6 H 96 c -3.324,0 -6,-2.676 -6,-6 v -20 c 0,-3.324 2.676,-6 6,-6 z"
+           id="path4" /><path
+           d="m 92.25,125.93945 c 1.025917,0.82031 2.328379,1.31055 3.75,1.31055 h 20 c 3.324,0 6,-2.676 6,-6 v -20 c 0,-2.048957 -1.01759,-3.85206 -2.57617,-4.933594 C 119.26577,104.79834 119.56193,119.58139 116,123 c -2.51326,2.41213 -17.69041,1.40436 -20.640625,1.98633 -1.044036,0.20595 -2.142028,0.57294 -3.109375,0.95312 z"
+           style="fill:#305676;fill-opacity:1;stroke-width:2"
+           id="path9" /><path
+           d="M 119.97852,96.75 C 118.92116,95.815134 117.52884,95.25 116,95.25 H 96 c -3.324,0 -6,2.676 -6,6 v 20 c 0,1.24524 0.375046,2.39873 1.019531,3.35547 1.965907,-3.38246 -0.09464,-20.57008 3.644531,-24.55078 1.908714,-2.032013 7.117278,-1.983015 11.224608,-1.970706 3.971,0.0119 10.92173,0.10936 12.28711,-0.238281 0.65077,-0.165693 1.25799,-0.575458 1.80274,-1.095703 z"
+           style="fill:#abc0d3;fill-opacity:1;stroke-width:2"
+           id="path10" /></g><g
+         id="g5"
+         style="display:inline"><path
+           style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+           d="m 96,94.25 c -3.860703,0 -7,3.139297 -7,7 v 20 c 0,3.8607 3.139297,7 7,7 h 20 c 3.8607,0 7,-3.1393 7,-7 v -20 c 0,-3.860703 -3.1393,-7 -7,-7 z m 0,2 h 20 c 2.7873,0 5,2.212703 5,5 v 20 c 0,2.7873 -2.2127,5 -5,5 H 96 c -2.787297,0 -5,-2.2127 -5,-5 v -20 c 0,-2.787297 2.212703,-5 5,-5 z"
+           id="path5" /></g></g></g></svg>
