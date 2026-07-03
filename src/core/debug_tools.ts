@@ -1,0 +1,108 @@
+import { els, createEl } from "./dom";
+import { m } from "./sensing_properties";
+
+export class DebugTools {
+    private divO = createEl("div", {id: "g-divO", class: "hide g-flex g-column"});
+    private o = {
+        fps: createEl("code", {}),
+        mousePosition: createEl("code", {}),
+        pointers: createEl("code", {}),
+        keyboard: createEl("code", {}),
+        viewportSize: createEl("code", {}),
+        viewportOffset: createEl("code", {}),
+        customValue: createEl("code", {style: {"color": "yellow"}}),
+        bPause: createEl("button", {text: "Pause"}),
+        bLogMessages: createEl("button", {text: "Log messages"})
+    };
+
+    private ms = 0;
+    private fps = 0;
+    private fpsCount = 0;
+
+    customValue: any = 0;
+    private customValueH: any = "update";
+
+    paused = false;
+    logMessages = false;
+    calledMessages: string[] = [];
+
+    isShown() {
+        return !this.divO.classList.contains("hide");
+    }
+
+    constructor() {
+        console.info("DebugTools activated");
+
+        import("@/debug_only.css").then(()=>{
+            const bDebug = createEl("button", {id: "g-bDebug", style: {"align-self": "end"}});
+            const debugPanel = createEl("div", {id: "g-debugPanel", class: "g-panel", children: [bDebug]});
+            const divDebugPanel = createEl("div", {id: "g-divDebugPanel", children: [debugPanel]});
+            bDebug.innerHTML = ( // inline SVG image
+                `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free 7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="#999999" d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z"/></svg>`
+            );
+            els.panel.after(divDebugPanel);
+
+            for (let el of Object.values(this.o)) {
+                this.divO.appendChild(el);
+            }
+
+            divDebugPanel.appendChild(this.divO);
+
+            // обработчики событий
+            bDebug.addEventListener("click", ()=>{
+                this.divO.classList.toggle("hide");
+            })
+
+            this.o.bPause.addEventListener("mousedown", ()=>{
+                this.paused = !this.paused;
+                if (this.paused) {
+                    this.o.bPause.textContent = "Resume";
+                    this.o.bPause.style.backgroundColor = "#ffff00";
+                }
+                else {
+                    this.o.bPause.textContent = "Pause";
+                    this.o.bPause.style.backgroundColor = "#f0f0f0";
+                }
+            });
+
+            this.o.bLogMessages.addEventListener("mousedown", ()=>{
+                this.logMessages = !this.logMessages;
+                if (this.logMessages) {
+                    this.o.bLogMessages.style.backgroundColor = "#00ff00";
+                }
+                else {
+                    this.o.bLogMessages.style.backgroundColor = "#f0f0f0";
+                }
+            });
+        });
+    }
+
+    updateDebugInfo(deltaSeconds: number) {
+        this.ms += deltaSeconds;
+        this.fpsCount += 1;
+        if (this.ms >= 1) {
+            this.ms -= 1;
+            this.fps = this.fpsCount;
+            this.fpsCount = 0;
+        }
+
+        this.o.fps.innerText = `fps: ${this.fps}`;
+        this.o.mousePosition.innerText = `Mouse Position: ${m.mouseX.toFixed(2)} ${m.mouseY.toFixed(2)}`;
+        this.o.pointers.innerText = `Pointers: ${m.hoveredPointerCount}; ${(Array.from(m.pointers.values())).map((e)=>(`${e.position.x.toFixed(2)}, ${e.position.y.toFixed(2)}`)).join("; ")}`;
+        this.o.keyboard.innerText = `Keyboard: ${(Array.from(m.keyboardCodes.entries())).map((e)=>(`${e[0]} "${e[1].character}"`)).join("; ")}`;
+        this.o.viewportSize.innerText = `Viewport Size: ${window.innerWidth}x${window.innerHeight}`;
+        this.o.viewportOffset.innerText = `Viewport Offset: ${window.scrollX}x${window.scrollY}`;
+        
+        if (this.customValue !== this.customValueH) {
+            this.customValueH = this.customValue;
+            try {
+                this.o.customValue.innerText = `Custom Value: ${
+                    JSON.stringify(this.customValue) ?? ""
+                }`;
+            }
+            catch (e){
+                this.o.customValue.innerText = String(e);
+            }
+        }
+    }
+}

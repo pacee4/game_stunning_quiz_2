@@ -13,13 +13,15 @@
      id="defs1" />
   <g
      id="g4"
-     transform="matrix(0.34917355,0,0,0.34917355,5.3181824,5.318182)">
+     transform="matrix(0.34917355,0,0,0.34917355,5.3181824,5.318182)"
+     style="fill:#999999">
     <g
        id="g3"
-       transform="matrix(1.6923077,0,0,1.6923077,-15.230768,-15.23077)">
+       transform="matrix(1.6923077,0,0,1.6923077,-15.230768,-15.23077)"
+       style="fill:#999999">
       <path
          id="path1"
-         style="fill:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"
+         style="fill:#999999;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:2"
          d="M 9.9999992,6.0000004 5.9999992,10 17.999999,22 5.9999992,34 l 4,4 11.9999998,-12 12,12 4,-4 -12,-12 12,-12 -4,-3.9999996 -12,11.9999996 z" />
     </g>
   </g>

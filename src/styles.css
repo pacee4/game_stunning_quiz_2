@@ -1,0 +1,379 @@
+body {
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+#g-divContainer {
+    /* fallback */
+    width: 100vw;
+    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
+}
+#g-divContainer > *{
+    position: absolute;
+}
+
+#g-divGame {
+    width: 100%;
+    height: 100%;
+}
+#g-divGame > * {
+    position: absolute;
+}
+
+#g-divCanvasPositioning.js-input-scrollable {
+    align-items: flex-start;
+}
+
+/* FULLSCREEN OVERLAY */
+/*#region*/
+#g-fullscreenOverlay {
+    background-color: #00000080;
+    
+    padding: 10px;
+    box-sizing: border-box;
+}
+#g-fullscreenOverlay img {
+    width: 5em;
+    margin-bottom: 10px;
+}
+#g-fullscreenOverlay p {
+    margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+}
+/*#endregion*/
+
+/* PROGRESS BAR */
+/*#region*/
+#g-divProgressBar{
+    padding: 0 5px;
+    box-sizing: border-box;
+    width: 100%;
+
+    text-align: center;
+}
+#g-divProgressBar > * {
+    margin: 0;
+    max-width: 100%;
+}
+#g-progressBarText{
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+#g-progressBarError{
+    font-family: monospace;
+    white-space: pre-wrap;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+#g-progressBarComment{
+    white-space: pre-line;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+#g-progressBar{
+    position: relative;
+
+    border: 1px solid #ffffff;
+    width: 200px;
+    height: 20px;
+}
+#g-progressBarValue{
+    position: absolute;
+
+    background-color: #ffffff;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+}
+/*#endregion*/
+
+
+/* CANVAS AND ELEMENTS */
+/*#region*/
+#g-divCanvas{
+    position: absolute;
+    overflow: hidden;
+
+    touch-action: none;
+}
+#g-divCanvas > *{
+    position: absolute;
+}
+#g-divCanvas > #g-divCanvasElements {
+    transform-origin: left top;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#g-divCanvasElements > *{
+    position: absolute;
+    color: black;
+}
+/* DEBUG: */
+#g-divCanvasElements :not(.g-transparent):not(input) {
+    background-color: #008000;
+}
+
+#g-divCanvasPositioning.js-input-scrollable #g-divCanvas {
+    touch-action: pan-y;
+}
+
+/*#endregion*/
+
+
+.g-panel {
+    background-color: #0000ff80;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    overflow: hidden;
+}
+#g-mainPanel {
+    top: 0;
+    left: 0;
+}
+.g-panel > button {
+    color: white;
+    border: none;
+    background-color: transparent;
+    padding: 0 2px;
+    width: 24px;
+    height: 24px;
+    box-sizing: content-box;
+
+    cursor: pointer;
+}
+.g-panel > button:hover {
+    background-color: #404040;
+}
+
+.g-panel img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+@media screen and ((max-height: 480px) and (orientation: landscape)) {
+    #g-divGame {
+        flex-direction: row;
+    }
+    #g-mainPanel {
+        flex-direction: column;
+    }
+}
+
+
+/* MODAL */
+/*#region*/
+#g-modal {
+    --c-back-color: #5e5e5e;
+    --c-shadow-blue: #8080ffff;
+    --c-green3: #0a8b06;
+    --c-green: #57b640;
+    --c-light-button: #b4e9c1;
+
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+}
+#g-modal > * {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#g-modal > #g-modalBackground {
+    position: absolute;
+    background-color: #00000080;
+}
+
+#g-modalFlexP {
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#g-modalWindow {
+    width: 600px;
+    max-width: 100%;
+    max-height: 100%;
+
+    background-color: var(--c-back-color);
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 5px 5px 15px black;
+}
+#g-modal.js-busy #g-modalWindow {
+    pointer-events: none;
+}
+
+/* MODAL: content */
+#g-modalWindow .horizontal-line {
+    border: 1px solid var(--c-green3); margin-bottom: 15px;
+}
+#g-modalWindow * {
+    margin: 0;
+}
+#g-modalWindow .mp > *:not(:last-child) {
+    margin-bottom: 0.5rem;
+}
+#g-modalWindow .m.bottom-0 {
+    margin-bottom: 0rem;
+}
+#g-modalWindow .m.bottom-2 {
+    margin-bottom: 0.5rem;
+}
+#g-modalWindow .m.bottom-4 {
+    margin-bottom: 1rem;
+}
+
+
+#g-modalWindow .t-blue {
+    color: #3030ff;
+}
+#g-modalWindow h1 {
+    text-align: center;
+    text-shadow: 0.05em 0.05em 0.1em var(--c-shadow-blue);
+    font-size: 2rem;
+}
+#g-modalWindow h2 {
+    font-size: 1.25rem;
+}
+#g-modalWindow h1, #g-modalWindow h2 {
+    font-family: "Trebuchet MS", "Fira Sans", "Noto Sans", sans-serif;
+}
+#g-modalWindow p {
+    font-family: "Noto Sans", "Open Sans", sans-serif;
+}
+#g-modalWindow .info {
+    font-family: "Roboto", sans-serif;
+}
+#g-modalWindow .bold {
+    font-weight: bold;
+}
+#g-modalWindow .date-period {
+    font-family: "Trebuchet MS", "Fira Sans", sans-serif;
+    font-style: italic;
+    color: var(--c-green);
+}
+#g-modalWindow .pre-line {
+    white-space: pre-line;
+}
+
+
+
+#g-modalInnerContent {
+    padding-top: 5px;
+    padding-left: 5px;
+
+    overflow-y: auto;
+}
+#g-modalInnerContent:not(.js-atTop) {
+    mask-image: linear-gradient(to bottom, transparent 0, black 15px);
+}
+
+#g-modalInnerContent ul > li[data-support="mobile"], #g-modalInnerContent ul > li[data-support="pc"] {
+    color: #e09000;
+}
+#g-modalInnerContent ul > li[data-support="mobile"]::after {
+    content: " 📱";
+}
+#g-modalInnerContent ul > li[data-support="pc"]::after {
+    content: " 🖥️";
+}
+
+#g-modalWindow menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#g-modalWindow menu li>*, #g-divProgressBar .reloadButton {
+    color: inherit;
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+
+    box-sizing: content-box;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    cursor: pointer;
+    
+    background-color: var(--c-green);
+    transition: background-color 0.3s;
+}
+
+#g-modalWindow menu li>*:hover {
+    background-color: var(--c-light-button);
+}
+
+#g-modalWindow #g-mwAQuit {
+    background-color: #c08009;
+}
+#g-modalWindow #g-mwAQuit:hover {
+    background-color: #ebbb8c;
+}
+
+#g-modalWindow menu > *:not(:last-child) {
+    margin-right: 10px;
+}
+
+/*#endregion*/
+
+
+#g-divProgressBar .reloadButton {
+    background-color: #5e5e5e;
+}
+#g-divProgressBar .reloadButton:hover {
+    background-color: #999999;
+}
+
+/* GENERAL */
+.hide {
+    display: none !important;
+}
+.hide2 {
+    display: none !important;
+}
+.g-unselectable {
+    user-select: none;
+    -webkit-user-select: none;
+}
+.g-extend {
+    width: 100%;
+    height: 100%;
+}
+.g-flex {
+    display: flex;
+    align-items: stretch;
+}
+.g-flex.g-column {
+    flex-direction: column;
+}
+.g-flex.g-center {
+    justify-content: center;
+    align-items: center;
+}
+
+/* SMALL SCREENS */
+@media screen and ((min-resolution: 2dppx) or (max-width: 600px)) {
+    #g-devArea code, #g-devArea button {
+        font-size: 0.75rem;
+    }
+}
