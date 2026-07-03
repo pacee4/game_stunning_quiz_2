@@ -347,6 +347,8 @@ class Screen {
             }
         });
 
+        els.divCanvas.addEventListener("touchstart", (event)=>{event.preventDefault();}, {passive: false}); // in case if CSS property "overscrollBehavior" won't work, like in Telegram's built-in browser
+        els.divCanvas.addEventListener("touchmove", (event)=>{event.preventDefault();}, {passive: false});
 
         // pointer interaction
         els.divCanvas.addEventListener("pointerdown", (event: PointerEvent)=>{
