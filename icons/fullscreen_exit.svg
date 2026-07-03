@@ -13,23 +13,25 @@
      id="defs1" />
   <g
      id="g4"
-     transform="scale(0.59090909)">
+     transform="scale(0.59090909)"
+     style="fill:#999999">
     <g
-       id="g3">
+       id="g3"
+       style="fill:#999999">
       <path
-         style="fill:#000000;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
+         style="fill:#999999;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
          d="M 20,20 H 8 l 4,-4 -8,-8 4,-4 8,8 4,-4 z"
          id="path2" />
       <path
-         style="fill:#000000;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
+         style="fill:#999999;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
          d="M 24,20 H 36 L 32,16 40,8 36,4 28,12 24,8 Z"
          id="path3" />
       <path
-         style="fill:#000000;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
+         style="fill:#999999;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
          d="M 20,24 H 8 l 4,4 -8,8 4,4 8,-8 4,4 z"
          id="path2-5" />
       <path
-         style="fill:#000000;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
+         style="fill:#999999;fill-opacity:1;stroke-width:6;stroke-miterlimit:2"
          d="m 24,24 h 12 l -4,4 8,8 -4,4 -8,-8 -4,4 z"
          id="path3-5" />
     </g>
