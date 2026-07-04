@@ -347,8 +347,49 @@ class Screen {
             }
         });
 
-        els.divCanvas.addEventListener("touchstart", (event)=>{event.preventDefault();}, {passive: false}); // in case if CSS property "overscrollBehavior" won't work, like in Telegram's built-in browser
-        els.divCanvas.addEventListener("touchmove", (event)=>{event.preventDefault();}, {passive: false});
+
+        // disable pull-to-refresh in mobile browser
+        document.documentElement.style.overscrollBehavior = "none";
+        document.body.style.overscrollBehavior = "none";
+        if (matchMedia("screen and (pointer: coarse)").matches) {
+            // just in case, prevent from swipe-to-close behavior in Telegram's built-in browser
+            if (els.divCanvasElements.children.length > 0) {
+                els.divCanvasPositioning.addEventListener("touchmove", (event)=>{
+                    if (!els.divCanvasPositioning.classList.contains("js-input-scrollable")) {
+                        const target = <HTMLElement|null>event.target;
+                        if (target && (
+                            (target === this.app.canvas
+                            || target === els.divCanvasPositioning
+                            || target === els.divCanvasElements
+                            || target.classList.contains("transparent"))
+                        )) {
+                            event.preventDefault();
+                        }
+                    }
+
+                    window.debugTools!.customValue = event.defaultPrevented;
+                }, { passive: false });
+            }
+            else {
+                els.divCanvasPositioning.addEventListener("touchmove", (event)=>{
+                    event.preventDefault();
+                }, { passive: false });
+            }
+        }
+
+
+        // disable right-click context menu
+        els.divCanvas.addEventListener("contextmenu", (event)=>{
+            const target = <HTMLElement|null>event.target;
+            if (target && (
+                target === this.app.canvas
+                || target === els.divCanvasElements
+                || target.classList.contains("transparent"))
+            ) {
+                event.preventDefault(); // stop context menu
+            }
+        });
+
 
         // pointer interaction
         els.divCanvas.addEventListener("pointerdown", (event: PointerEvent)=>{
@@ -402,7 +443,7 @@ class Screen {
 
         // keyboard (OPTIONAL)
         m.mediaTouchDevice.addEventListener("change", ()=>{
-            if (m.mediaTouchDevice.matches) {
+            if (m.isTouchDevice) {
                 document.removeEventListener("keydown", this.handleEventKeyDown);
                 document.removeEventListener("keyup", this.handleEventKeyUp);
             }
@@ -410,8 +451,9 @@ class Screen {
                 document.addEventListener("keydown", this.handleEventKeyDown);
                 document.addEventListener("keyup", this.handleEventKeyUp);
             }
+            console.log("media query changed");
         });
-        if (!m.mediaTouchDevice.matches) {
+        if (!m.isTouchDevice) {
             document.addEventListener("keydown", this.handleEventKeyDown);
             document.addEventListener("keyup", this.handleEventKeyUp);
         }
@@ -421,6 +463,7 @@ class Screen {
                     m.simulateKeyUp(code);
                 }
             }
+            console.log("event custom-switchgamefocus triggered");
         });
 
         // input fields
@@ -443,16 +486,6 @@ class Screen {
 
         // event listeners for orientation detection and fullscreen toggle
         UI.setGameEvents();
-        // disable pull-to-refresh for mobile devices
-        document.documentElement.style.overscrollBehavior = "none";
-
-        // disable right-click context menu
-        els.divCanvas.addEventListener("contextmenu", (event)=>{
-            const target = <HTMLElement|null>event.target;
-            if (target && (target.id === "canvas" || target.id === "g-divCanvasElements" || target.classList.contains("transparent"))) {
-                event.preventDefault(); // stop context menu
-            }
-        });
     }
 
 

@@ -117,7 +117,7 @@ body {
     color: black;
 }
 /* DEBUG: */
-#g-divCanvasElements :not(.g-transparent):not(input) {
+#g-divCanvasElements :not(.transparent):not(input) {
     background-color: #008000;
 }
 
